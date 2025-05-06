@@ -1,0 +1,19 @@
+{
+    "name": "otimizador-rotas",
+    "version": "1.0.0",
+    "description": "Algoritmo para otimização de rotas de entrega utilizando TypeScript",
+    "main": "dist/aplicacao.js",
+    "scripts": {
+      "build": "tsc",
+      "start": "node dist/aplicacao.js",
+      "dev": "ts-node-dev desktop/aplicacao.ts"
+    },
+    "keywords": ["otimização", "rotas", "typescript", "logística"],
+    "author": "Gustavo",
+    "license": "MIT",
+    "devDependencies": {
+      "ts-node-dev": "^2.0.0",
+      "typescript": "^5.0.0"
+    }
+  }
+  
