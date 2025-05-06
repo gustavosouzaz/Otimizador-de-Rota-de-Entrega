@@ -1,38 +1,35 @@
 import { PontoEntrega } from "../modelos/PontoEntrega";
 import { calcularDistanciaEntrePontos } from "../utilitarios/CalculadoraDistancia";
 
-// Função para otimizar a rota com o algoritmo do Vizinho Mais Próximo
-export function otimizarRota(pontos: PontoEntrega[]): PontoEntrega[] {
-  const pontosVisitados: PontoEntrega[] = [];
-  let pontoAtual = pontos[0];  // Começa com o primeiro ponto
-  pontosVisitados.push(pontoAtual);
+export function otimizarRota(pontos: PontoEntrega[]) {
+  let ordem: (string | number)[] = [];
+  let visitados: PontoEntrega[] = [];
+  let atual = pontos[0];
+  let distanciaTotal = 0;
 
-  let pontosRestantes = [...pontos]; 
-  pontosRestantes.shift(); 
+  ordem.push(atual.id);
+  visitados.push(atual);
 
-  while (pontosRestantes.length > 0) {
-    let pontoMaisProximo: PontoEntrega | null = null;
-    let menorDistancia = Infinity;
+  while (visitados.length < pontos.length) {
+    let proximos = pontos.filter(p => !visitados.includes(p));
+    let maisPerto = proximos[0];
+    let menor = calcularDistanciaEntrePontos(atual, maisPerto);
 
-    // Encontrar o ponto mais próximo
-    for (let i = 0; i < pontosRestantes.length; i++) {
-      const distancia = calcularDistanciaEntrePontos(pontoAtual, pontosRestantes[i]);
-      if (distancia < menorDistancia) {
-        menorDistancia = distancia;
-        pontoMaisProximo = pontosRestantes[i];
+    for (let p of proximos) {
+      let d = calcularDistanciaEntrePontos(atual, p);
+      if (d < menor) {
+        menor = d;
+        maisPerto = p;
       }
     }
 
-    // Vai para o ponto mais próximo
-    pontosVisitados.push(pontoMaisProximo!);
-    pontoAtual = pontoMaisProximo!;
-    
-    // Remove o ponto da lista de pontos restantes
-    pontosRestantes = pontosRestantes.filter(ponto => ponto !== pontoMaisProximo);
+    distanciaTotal += menor;
+    atual = maisPerto;
+    ordem.push(atual.id);
+    visitados.push(atual);
   }
 
-  // Retorna ao ponto inicial
-  pontosVisitados.push(pontosVisitados[0]);
+  distanciaTotal += calcularDistanciaEntrePontos(atual, ordem[0] as any);
 
-  return pontosVisitados;
+  return { ordem, distanciaTotal };
 }
