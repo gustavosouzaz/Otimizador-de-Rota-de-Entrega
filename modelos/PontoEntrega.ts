@@ -1,8 +1,3 @@
-export interface PontoEntrega {
-    id: string | number;  // Pode ser string ou número
-    x: number;           
-    y: number;           
-  }
 
   const pontosDeEntrega: PontoEntrega[] = [
     { id: 1, x: -22.9068, y: -43.1729 },
