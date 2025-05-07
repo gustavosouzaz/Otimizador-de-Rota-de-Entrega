@@ -1,9 +1,8 @@
-import { PontoEntrega } from "../modelos/PontoEntrega";
 import { calcularDistanciaEntrePontos } from "../utilitarios/CalculadoraDistancia";
 
-export function otimizarRota(pontos: PontoEntrega[]) {
+export function otimizarRota(pontos: { id: string | number, x: number, y: number }[]) {
   let ordem: (string | number)[] = [];
-  let visitados: PontoEntrega[] = [];
+  let visitados: { id: string | number, x: number, y: number }[] = [];
   let atual = pontos[0];
   let distanciaTotal = 0;
 
@@ -29,7 +28,7 @@ export function otimizarRota(pontos: PontoEntrega[]) {
     visitados.push(atual);
   }
 
-  distanciaTotal += calcularDistanciaEntrePontos(atual, ordem[0] as any);
+  distanciaTotal += calcularDistanciaEntrePontos(atual, pontos[0]);
 
   return { ordem, distanciaTotal };
 }
