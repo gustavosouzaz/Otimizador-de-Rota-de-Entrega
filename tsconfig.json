@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+      "baseUrl": "./src",
       "target": "ES2020",
       "module": "commonjs",
       "rootDir": "",
@@ -10,7 +11,7 @@
       "forceConsistentCasingInFileNames": true,
       "skipLibCheck": true
     },
-    "include": ["src", "app.js"],
+    "include": ["src", "app.js", "src/servicos"],
     "exclude": ["node_modules", "dist"]
   }
   

@@ -1,5 +1,16 @@
-import { otimizarRota } from "./servicos/ServicoOtimizacaoRotas";
+import { otimizarRota } from "./servicoOtimizacaoRotas";
+import express from 'express';
 
+//fazendo a exportação direto no arquivo.
+const app = express();
+app.use(express.json());
+
+// Exemplo de rota de teste
+app.get('/', (req, res) => {
+  res.send('API Otimizador de Rotas funcionando!');
+});
+
+export default app;
 // Dados dos pontos de entrega
 const pontosDeEntrega = [
   { id: 1, x: -22.9068, y: -43.1729 },
