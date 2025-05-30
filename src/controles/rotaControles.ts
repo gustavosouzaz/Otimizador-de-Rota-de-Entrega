@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import PontoEntrega from '../modelos/PontoEntrega'; // ou o caminho correto do seu model
+import PontoEntrega from '../modelos/PontoEntrega'; 
 
 export async function salvarPontos(req: Request, res: Response) {
   try {
@@ -10,6 +10,8 @@ export async function salvarPontos(req: Request, res: Response) {
 
     res.status(201).json({ id: doc._id });
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao salvar pontos.' });
-  }
+  console.error('Erro ao salvar pontos:', error); 
+  res.status(500).json({ error: 'Erro ao salvar pontos.' });
 }
+}
+

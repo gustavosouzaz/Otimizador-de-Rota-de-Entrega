@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 // Conexão com MongoDB
-const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/rotasdb';
+const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/OtimizarRotas';
 
 mongoose.connect(mongoURL)
   .then(() => console.log('🟢 Conectado ao MongoDB'))
@@ -20,7 +20,7 @@ app.use('/api', router);
 
 
 // Exemplo de rota de teste
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('API Otimizador de Rotas funcionando!');
 });
 
