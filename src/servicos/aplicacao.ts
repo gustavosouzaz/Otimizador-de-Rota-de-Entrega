@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 // Conexão com MongoDB
-const mongoURL = process.env.MONGO_URI || 'mongodb://localhost:27017/rotasdb';
+const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/rotasdb';
 
 mongoose.connect(mongoURL)
   .then(() => console.log('🟢 Conectado ao MongoDB'))
@@ -16,7 +16,7 @@ mongoose.connect(mongoURL)
 //fazendo a exportação direto no arquivo.
 const app = express();
 app.use(express.json());
-app.use('/', router);
+app.use('/api', router);
 
 
 // Exemplo de rota de teste
