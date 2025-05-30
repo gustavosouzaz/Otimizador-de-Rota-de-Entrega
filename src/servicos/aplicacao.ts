@@ -1,9 +1,13 @@
 import { otimizarRota } from "./servicoOtimizacaoRotas";
 import express from 'express';
+import router from '../routes/rotas';
+
 
 //fazendo a exportação direto no arquivo.
 const app = express();
 app.use(express.json());
+app.use('/', router);
+
 
 // Exemplo de rota de teste
 app.get('/', (req, res) => {
@@ -26,3 +30,6 @@ const resultado = otimizarRota(pontosDeEntrega);
 // Exibe o resultado no terminal
 console.log("Ordem de entrega:", resultado.ordem);
 console.log("Distância total da rota:", resultado.distanciaTotal.toFixed(2));
+
+
+
