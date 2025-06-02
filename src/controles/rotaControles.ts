@@ -1,17 +1,19 @@
+// rotaControles.ts
 import { Request, Response } from 'express';
-import PontoEntrega from '../modelos/PontoEntrega'; 
+import PontoEntregaModel from '../modelos/PontoEntrega';
 
-export async function salvarPontos(req: Request, res: Response) {
+export const salvarPontos = async (req: Request, res: Response) => {
   try {
-    const pontos = req.body;
+    const { pontos } = req.body;
 
-    // Salva os pontos no MongoDB
-    const doc = await PontoEntrega.create({ pontos });
+    const novoDocumento = new PontoEntregaModel({ pontos });
+    await novoDocumento.save();
 
-    res.status(201).json({ id: doc._id });
-  } catch (error) {
-  console.error('Erro ao salvar pontos:', error); 
-  res.status(500).json({ error: 'Erro ao salvar pontos.' });
-}
-}
+    res.status(201).json({ mensagem: 'Pontos salvos com sucesso!' });
+  } catch (erro) {
+    console.error('Erro ao salvar pontos:', erro);
+    res.status(500).json({ erro: 'Erro ao salvar pontos.' });
+  }
+};
+
 

@@ -13,15 +13,19 @@ export interface IPontoEntrega extends Document {
   dataCriacao: Date;
 }
 
+// Schema de um ponto individual
+const pontoSchema = new Schema({
+  id: { type: Schema.Types.Mixed, required: true },
+  x: { type: Number, required: true },
+  y: { type: Number, required: true }
+});
+
 // Schema do conjunto de pontos
 const PontoEntregaSchema = new Schema<IPontoEntrega>({
-  pontos: [
-    {
-      id: { type: Schema.Types.Mixed, required: true },
-      x: { type: Number, required: true },
-      y: { type: Number, required: true },
-    }
-  ],
+  pontos: {
+    type: [pontoSchema],
+    required: true
+  },
   dataCriacao: {
     type: Date,
     default: Date.now

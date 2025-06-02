@@ -1,15 +1,20 @@
+import express from 'express';
 import mongoose from 'mongoose';
-import app from './servicos/aplicacao';
+import rota from './routes/rotas';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/rotasdb';
+const app = express();
+app.use(express.json());
+app.use('/api', rota);
 
-mongoose.connect(MONGODB_URI)
+const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/otimizador';
+
+mongoose.connect(MONGO_URI)
   .then(() => {
-    console.log('✅ Conectado ao MongoDB com sucesso!');
+    console.log('✅ Conectado ao MongoDB');
     app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
     });
