@@ -32,3 +32,4 @@ export const buscarPontosPorId = async (req: Request, res: Response): Promise<vo
     res.status(500).json({ erro: 'Erro ao buscar pontos.' });
   }
 };
+
