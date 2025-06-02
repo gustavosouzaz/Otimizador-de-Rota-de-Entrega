@@ -1,13 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import rota from './routes/rotas';
 import dotenv from 'dotenv';
-
+import rotas from './routes/rotas'; 
+import router from './routes/rotas';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use('/api', rota);
+app.use('/api', rotas); 
+app.use('/api', router);
+export default app;
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/otimizador';
