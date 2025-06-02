@@ -1,6 +1,5 @@
 import { otimizarRota } from "./servicoOtimizacaoRotas";
 import express from 'express';
-import router from '../routes/rotas';
 import rotas from '../routes/rotas';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -17,7 +16,6 @@ mongoose.connect(mongoURL)
 //fazendo a exportação direto no arquivo.
 const app = express();
 app.use(express.json());
-app.use('/api', router);
 app.use('/api', rotas); 
 
 

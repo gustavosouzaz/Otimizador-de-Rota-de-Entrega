@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler } from 'express';
+import { Request, Response } from 'express';
 import PontoEntregaModel from '../modelos/PontoEntrega';
 
 export const salvarPontos = async (req: Request, res: Response) => {
@@ -16,10 +16,7 @@ export const salvarPontos = async (req: Request, res: Response) => {
 };
 
 
-export const buscarPontosPorId = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const buscarPontosPorId = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
     const documento = await PontoEntregaModel.findById(id);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { salvarPontos, buscarPontosPorId } from '../controles/rotaControles';
+import { buscarPontosPorId, salvarPontos } from '../controles/rotaControles';
 
 const router = express.Router();
 

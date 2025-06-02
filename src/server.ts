@@ -2,13 +2,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import rotas from './routes/rotas'; 
-import router from './routes/rotas';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use('/api', rotas); 
-app.use('/api', router);
 export default app;
 
 const PORT = process.env.PORT || 3000;
