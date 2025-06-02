@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import PontoEntregaModel from '../modelos/PontoEntrega';
+import { calcularRotaOtimizada } from '../utilitarios/CalculadoraDistancia'; 
+
 
 export const salvarPontos = async (req: Request, res: Response) => {
   try {
@@ -31,5 +33,29 @@ export const buscarPontosPorId = async (req: Request, res: Response): Promise<vo
     console.error('Erro ao buscar pontos:', erro);
     res.status(500).json({ erro: 'Erro ao buscar pontos.' });
   }
-};
+}; 
 
+// Controle para GET /rota/:id
+export const buscarRotaPorId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const pontos = await PontoEntregaModel.find({ grupoId: id });
+
+    if (!pontos || pontos.length === 0) {
+      res.status(404).json({ error: 'Conjunto de pontos não encontrado.' });
+      return;
+    }
+
+    const { ordem, distanciaTotal } = calcularRotaOtimizada(pontos);
+
+    res.status(200).json({
+      ordemRota: ordem.map(p => p._id),
+      distanciaTotal,
+    });
+
+  } catch (erro) {
+    console.error('Erro ao calcular rota:', erro);
+    res.status(500).json({ error: 'Erro ao calcular rota.' });
+  }
+};

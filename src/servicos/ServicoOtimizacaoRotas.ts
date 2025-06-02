@@ -1,4 +1,4 @@
-import { calcularDistanciaEntrePontos } from "../../utilitarios/CalculadoraDistancia";
+import { calcularDistanciaEntrePontos } from "../utilitarios/CalculadoraDistancia";
 
 export function otimizarRota(pontos: { id: string | number, x: number, y: number }[]) {
   let ordem: (string | number)[] = [];
