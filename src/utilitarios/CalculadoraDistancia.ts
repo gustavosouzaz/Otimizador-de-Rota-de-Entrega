@@ -44,3 +44,4 @@ export function calcularRotaOtimizada(pontos: any[]) {
     distanciaTotal: parseFloat(distanciaTotal.toFixed(2)),
   };
 }
+
