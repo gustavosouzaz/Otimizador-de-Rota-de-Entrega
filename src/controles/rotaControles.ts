@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import PontoEntregaModel from '../modelos/PontoEntrega';
-import { RotaCalculadaModel } from '../modelos/RotaCalculada';
 import { calcularRotaOtimizada } from '../utilitarios/CalculadoraDistancia'; 
 
 
@@ -49,12 +48,6 @@ export const buscarRotaPorId = async (req: Request, res: Response): Promise<void
     }
 
     const { ordem, distanciaTotal } = calcularRotaOtimizada(pontos);
-
-    await RotaCalculadaModel.create({
-      grupoId: id,
-      ordemRota: ordem.map(p => p._id),
-      distanciaTotal,
-    });
 
     res.status(200).json({
       ordemRota: ordem.map(p => p._id),

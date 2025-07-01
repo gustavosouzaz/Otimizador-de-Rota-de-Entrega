@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+
 // Interface para um ponto individual
 interface IPonto {
   id: number | string;

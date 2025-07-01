@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 // Conexão com MongoDB
-const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/OtimizarRotas';
+const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/OtimizarRota';
 
 mongoose.connect(mongoURL)
   .then(() => console.log('🟢 Conectado ao MongoDB'))
