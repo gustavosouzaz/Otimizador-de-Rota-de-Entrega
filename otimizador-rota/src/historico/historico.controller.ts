@@ -1,11 +1,19 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  NotFoundException,
+  UseGuards,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { AuthGuard } from '@nestjs/passport';
 import {
   HistoricoRota,
   HistoricoRotaDocument,
 } from './schemas/historico-rota.schema';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('historico')
 export class HistoricoController {
   constructor(

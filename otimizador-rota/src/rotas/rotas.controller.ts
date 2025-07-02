@@ -5,10 +5,13 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { RotasService } from './rotas.service';
 import { Rota } from './schemas/rota.schema';
 
+@UseGuards(AuthGuard('jwt')) // ✅ Protege todas as rotas deste controller
 @Controller('rotas')
 export class RotasController {
   constructor(private readonly rotasService: RotasService) {}
