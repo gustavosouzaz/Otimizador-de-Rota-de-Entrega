@@ -9,7 +9,7 @@ export class PontosController {
   constructor(private readonly pontosService: PontosService) {}
 
   @Post()
-  async criarPontos(@Body() createPontosDto: CreatePontosDto) {
-    return this.pontosService.criarPontos(createPontosDto.pontos); // ⬅ nome do método corrigido
+  async criarPontos(@Body() body: CreatePontosDto) {
+    return this.pontosService.criar(body.grupoId, body.pontos);
   }
 }

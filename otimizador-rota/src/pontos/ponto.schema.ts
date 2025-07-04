@@ -6,13 +6,13 @@ export type PontoDocument = Ponto & Document;
 @Schema()
 export class Ponto {
   @Prop({ required: true })
-  id: number;
-
-  @Prop({ required: true })
   x: number;
 
   @Prop({ required: true })
   y: number;
+
+  @Prop({ required: true })
+  grupoId: string;
 }
 
 export const PontoSchema = SchemaFactory.createForClass(Ponto);

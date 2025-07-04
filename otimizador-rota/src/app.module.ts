@@ -6,15 +6,16 @@ import { AppService } from './app.service';
 import { PontoModule } from './pontos/pontos.module';
 import { RotasModule } from './rotas/rotas.module';
 import { HistoricoModule } from './historico/historico.module';
+import { AuthModule } from './auth/auth.module'; // ✅ importado
 
 @Module({
   imports: [
-    // ✅ ConfigModule global
+    // ✅ Configuração global do .env
     ConfigModule.forRoot({
       isGlobal: true,
     }),
 
-    // ✅ Mongoose conectado com variável de ambiente de forma segura
+    // ✅ Conexão MongoDB com fallback e formatação corrigida
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -25,10 +26,11 @@ import { HistoricoModule } from './historico/historico.module';
       inject: [ConfigService],
     }),
 
-    // ✅ Seus módulos principais
+    // ✅ Módulos da aplicação
     PontoModule,
     RotasModule,
     HistoricoModule,
+    AuthModule, // 👈 incluído para corrigir erro "jwt strategy"
   ],
   controllers: [AppController],
   providers: [AppService],

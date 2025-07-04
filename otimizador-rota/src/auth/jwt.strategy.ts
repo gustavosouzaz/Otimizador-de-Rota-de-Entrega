@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { ConfigService } from '@nestjs/config';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -14,10 +14,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: JwtPayload): { username: string; userId: string } {
+  async validate(
+    payload: JwtPayload,
+  ): Promise<{ username: string; userId: string }> {
+    // Para evitar erro eslint (require-await)
+    await Promise.resolve();
+
     return {
       username: payload.username,
-      userId: String(payload.sub),
+      userId: payload.sub,
     };
   }
 }

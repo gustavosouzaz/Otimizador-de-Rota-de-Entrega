@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Ponto, PontoDocument } from './ponto.schema';
-import { CreatePontoDto } from './dto/criar-pontos.dto';
+import { CreatePontosDto } from './dto/criar-pontos.dto';
 
 @Injectable()
 export class PontosService {
@@ -11,7 +11,16 @@ export class PontosService {
     private readonly pontoModel: Model<PontoDocument>,
   ) {}
 
-  async criarPontos(pontos: CreatePontoDto[]): Promise<Ponto[]> {
-    return this.pontoModel.insertMany(pontos);
+  async criar(
+    grupoId: string,
+    pontos: CreatePontosDto['pontos'],
+  ): Promise<Ponto[]> {
+    const pontosComGrupo = pontos.map((ponto) => ({
+      x: ponto.x,
+      y: ponto.y,
+      grupoId: String(grupoId),
+    }));
+
+    return this.pontoModel.insertMany(pontosComGrupo);
   }
 }
